@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
 {
     public delegate void OnClickSurface(Vector3 point);
 
-    public static event OnClickSurface onClickSurface;
+    public static event OnClickSurface onClickGround;
 
 
     void Start()
@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
             RaycastHit hitInfo;
             if(Physics.Raycast(ray,out hitInfo))
             {
-                onClickSurface?.Invoke(hitInfo.point);
+                onClickGround?.Invoke(hitInfo.point);
             }
 
         }

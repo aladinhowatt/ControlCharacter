@@ -13,10 +13,10 @@ public class PlayerManager : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        InputManager.onClickSurface += OnClickSurface;
+        InputManager.onClickGround += OnClickGround;
     }
 
-    private void OnClickSurface(Vector3 point)
+    private void OnClickGround(Vector3 point)
     {
         MovePlayerTo(point);
        
@@ -41,5 +41,10 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.onClickGround -= OnClickGround;
     }
 }
