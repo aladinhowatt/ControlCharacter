@@ -5,7 +5,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
 
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     [Serializable]
     public enum GameState
     {
@@ -16,6 +29,11 @@ public class GameManager : MonoBehaviour
 
     public GameState State;
 
+    [SerializeField]
+    private PlayerManager playerManager;
+
+    [SerializeField]
+    private InputManager inputManager;
 
     public void Start()
     {
@@ -30,11 +48,16 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Starting:
                 Debug.Log("Start game");
+                ChangeState(GameState.Main);
                 break;
             case GameState.Main:
+
+
                 break;
             case GameState.Ending:
                 break;
         }
     }
+
+
 }
